@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Admin from "./pages/Admin";
@@ -11,11 +11,25 @@ function App() {
   return (
     <BrowserRouter>
       <Navbar />
+
       <Routes>
-        <Route path="/" element={<Home />} />
+        {/* 🔁 ROOT → LOGIN */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
+
+        {/* 🔓 LOGIN (PUBLIC) */}
         <Route path="/login" element={<Login />} />
 
-        {/* 🔐 Protected Admin Route */}
+        {/* 🏠 HOME (FIRST PAGE AFTER LOGIN) */}
+        <Route
+          path="/home"
+          element={
+            <ProtectedRoute>
+              <Home />
+            </ProtectedRoute>
+          }
+        />
+
+        {/* 🔐 ADMIN */}
         <Route
           path="/admin"
           element={
@@ -25,7 +39,15 @@ function App() {
           }
         />
 
-        <Route path="/about" element={<About />} />
+        {/* ℹ ABOUT */}
+        <Route
+          path="/about"
+          element={
+            <ProtectedRoute>
+              <About />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

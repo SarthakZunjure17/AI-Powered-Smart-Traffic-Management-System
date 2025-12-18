@@ -36,7 +36,7 @@ function Admin() {
 
   return (
     <div className="admin-page">
-      <h1 className="admin-title">🔐 Admin Control Panel</h1>
+      <h1 className="admin-title"> Admin Control Panel</h1>
 
       {/* STATUS MESSAGE */}
       {message && <div className="admin-status">{message}</div>}
