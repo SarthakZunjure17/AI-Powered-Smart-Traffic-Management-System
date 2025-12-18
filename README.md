@@ -16,21 +16,26 @@
 
 ## 📌 Project Overview
 
-The **AI-Powered Smart Traffic Management System** is an academic project designed to simulate how **computer vision and intelligent control logic** can be used to improve urban traffic flow — especially during **emergency situations**.
+The **AI-Powered Smart Traffic Management System** is an **academic simulation project** that demonstrates how **computer vision and intelligent control logic** can improve traffic flow at road intersections — especially during **emergency situations**.
 
-The system detects **emergency vehicles (ambulance, police, fire brigade)** from traffic videos using **YOLOv8**, and dynamically modifies traffic signals to give **priority clearance** to the emergency lane while ensuring safe transitions using **yellow signals**.
+The system uses **YOLOv8 object detection** to identify emergency vehicles such as **ambulances, police vehicles, and fire brigades** from traffic videos.  
+Once an emergency vehicle is detected, the system dynamically **prioritizes the corresponding traffic lane** while maintaining **safe signal transitions** using a **YELLOW buffer phase**.
 
-This project focuses on **real-world practicality**, **safety**, and **clear system behavior**, making it ideal for academic evaluation and demonstrations.
+This project focuses on:
+- Practical traffic logic
+- Safety-aware signal transitions
+- Clear and explainable system behavior  
+making it suitable for **final-year project evaluation and live demonstrations**.
 
 ---
 
 ## 🎯 Key Objectives
 
 - Detect emergency vehicles using AI-based object detection  
-- Prioritize traffic signals dynamically for emergency lanes  
-- Ensure **safe signal transitions** using GREEN → YELLOW → RED logic  
-- Provide a **web-based dashboard** for visualization and control  
-- Simulate **admin override** functionality for traffic authorities  
+- Dynamically prioritize traffic signals for emergency lanes  
+- Ensure **safe GREEN → YELLOW → RED transitions**  
+- Provide a **web-based dashboard** for monitoring and control  
+- Simulate **admin override functionality** for traffic authorities  
 
 ---
 
@@ -41,13 +46,13 @@ This project focuses on **real-world practicality**, **safety**, and **clear sys
   - Ambulance
   - Police vehicles
   - Fire brigade
-- Confidence-based detection filtering
-- Visual bounding boxes on output video
+- Confidence-based filtering
+- Bounding boxes drawn on output video
 
 ### 🚦 Intelligent Traffic Signal Control
-- Normal traffic cycle:
+- **Normal mode**
   - GREEN (10s) → YELLOW (5s) → next lane
-- Emergency handling:
+- **Emergency mode**
   - Current lane switches to **YELLOW (buffer time)**
   - Emergency lane turns **GREEN**
   - After priority duration, system safely returns to normal mode
@@ -56,14 +61,14 @@ This project focuses on **real-world practicality**, **safety**, and **clear sys
 - Upload traffic videos for analysis
 - View processed output video
 - Live traffic signal status visualization
-- Emergency status display
-- Admin panel for manual signal override
+- Emergency detection status display
+- Simple and clean UI for demonstration
 
 ### 🔐 Admin Control Panel
 - Force emergency on a selected lane
-- Reset signals to normal mode
+- Reset traffic signals to normal mode
 - Configure emergency priority duration
-- Simulation-only (no real traffic hardware)
+- **Simulation only** (no real traffic hardware involved)
 
 ---
 
@@ -81,8 +86,8 @@ This project focuses on **real-world practicality**, **safety**, and **clear sys
 - Fetch API
 
 ### AI / Computer Vision
-- YOLOv8 (object detection)
-- Custom trained emergency vehicle dataset
+- YOLOv8 object detection
+- Custom emergency vehicle dataset
 
 ---
 
@@ -92,23 +97,23 @@ AI-Powered Smart Traffic Management System/
 │
 ├── api_server.py # Flask backend API
 ├── emergency_core.py # YOLO-based video processing
-├── signal_controller.py # Traffic signal logic (NORMAL + EMERGENCY)
+├── signal_controller.py # Traffic signal logic
 ├── requirements.txt # Python dependencies
 │
 ├── frontend/
-│ ├── traffic-management/ # React frontend
-│ │ ├── src/
-│ │ │ ├── pages/ # Home, Admin, About
-│ │ │ ├── components/ # Navbar, UI components
-│ │ │ ├── App.jsx
-│ │ │ └── main.jsx
+│ └── traffic-management/ # React frontend
+│ └── src/
+│ ├── pages/ # Home, Admin, About, Login
+│ ├── components/ # Navbar, ProtectedRoute
+│ ├── App.jsx
+│ └── main.jsx
 │
 ├── project/
 │ └── datasets/
-│ └── emergency_vehicles/ # Training dataset
+│ └── emergency_vehicles # Training dataset
 │
-├── uploads/ # Uploaded input videos (ignored in git)
-├── output/ # Processed output videos (ignored in git)
+├── uploads/ # Uploaded input videos (git ignored)
+├── output/ # Processed output videos (git ignored)
 
 
 ---
@@ -120,7 +125,7 @@ AI-Powered Smart Traffic Management System/
 pip install -r requirements.txt
 python api_server.py
 
-Backend runs on:
+Backend runs at:
 
 http://127.0.0.1:5000
 
@@ -130,35 +135,60 @@ npm install
 npm run dev
 
 
-Frontend runs on:
+Frontend runs at:
 
 http://localhost:5173
 
-🧪 How It Works (Demo Flow)
+🧪 System Flow (Demo)
 
-Upload a traffic video via web UI
+User opens the web application
 
-AI detects emergency vehicles frame-by-frame
+Login page appears (admin authentication)
 
-Output video is generated with detection overlays
+User uploads a traffic video
+
+AI processes video frame-by-frame
+
+Emergency vehicle is detected (if present)
 
 Traffic signals change dynamically:
 
-Yellow buffer → Emergency green → Resume normal cycle
+Yellow buffer → Emergency green → Normal cycle
 
-Admin panel allows manual overrides for demonstration
+Admin panel allows manual override for demonstration
+
+🔐 Authentication Flow
+
+Login page appears on first load
+
+Valid credentials enable access to:
+
+Home
+
+Admin
+
+About pages
+
+Protected routes implemented using React Router
+
+Authentication state stored using localStorage
+
+Demo Credentials
+
+Username: admin
+Password: admin123
 
 🎓 Academic Notes
 
 This is a simulation-based academic project
 
-No real traffic hardware is controlled
+No real traffic lights or CCTV systems are controlled
 
 Designed for:
 
-Final year project evaluation
+Final-year project evaluation
 
-AI + CV demonstrations
+AI & Computer Vision demonstrations
 
 Smart city concept explanation
 
@@ -179,6 +209,7 @@ Smart city IoT integration
 This project is licensed under the MIT License.
 
 <div align="center">
+
 ⭐ If you find this project useful, consider starring the repository ⭐
 
 AI for Safer Roads • Smart Emergency Response • Academic Simulation
